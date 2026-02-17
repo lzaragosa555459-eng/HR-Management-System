@@ -28,12 +28,13 @@
 
     <section>
          <div class="container mt-5" id="home">
-            <div class="row" style="background-color: rgb(180, 139, 139); height: 500px;">
-                <div class="col-12"></div>
+            <div class="row">
+                <img src="Untitled design.png" alt="A person holding a laptop">
+                
             </div>
             <div class="row">
-                <div class="col-12" style="text-align: justify; line-height: 40.5px;">
-                    <p>Human Resource Management Systems (HRMS) are comprehensive software solutions designed to streamline and automate the core functions of human resource management. 
+                <div class="col-12" style="text-align: justify; line-height: 40.5px; margin-top: 100px;">
+                    <p class="lead">Human Resource Management Systems (HRMS) are comprehensive software solutions designed to streamline and automate the core functions of human resource management. 
                         These systems help organizations efficiently manage employee information, payroll, recruitment, attendance, performance evaluation, and training programs. 
                         By centralizing HR processes, HRMS reduces administrative workload, minimizes errors, and improves data accuracy, enabling HR professionals to focus on strategic initiatives such as talent development and workforce planning. 
                         Modern HRMS platforms often integrate advanced features like self-service portals, analytics, and cloud-based access, allowing employees and managers to interact with HR data anytime and anywhere. 
@@ -45,22 +46,85 @@
     <section>
         <div class="container" id="login">
             <div class="row">
-                <div class="col-7">
-
+                <div class="col-7 text-center p-5" style="line-height: 40.5px;">
+                    <p class="lead">Welcome to HRMS Portal
+                    Please sign in to access your employee dashboard, manage attendance, payroll, leave requests, and personal information securely.
+                    Login to your account. Enter your credentials to continue.
+                    </p>
                 </div>
-                <div class="col-5">
-                     <form action="server.php" method="post">
-                        <label for="username">Username</label>
-                         <input type="text">
-                        <label for="email">Email</label>
-                        <input type="email">
-                        <label for="password">Password</label>
-                        <input type="password">
-                    </form>
+                <div class="col-4" style="border: 3px solid;">
+            <form class="p-3">
+            
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+
+          </form>
                 </div>
                
             </div>
         </div>
     </section>
 </body>
+<footer class="bg-dark text-white pt-4 pb-2">
+  <div class="container">
+    <div class="row">
+      
+      <!-- Company Info -->
+      <div class="col-md-4 mb-3">
+        <h5>HRMS Portal</h5>
+        <p class="small">
+          Manage employee records, payroll, attendance, and leave requests efficiently and securely.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-4 mb-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white text-decoration-none">Dashboard</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Leave Management</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Payroll</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Contact HR</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-md-4 mb-3">
+        <h5>Contact</h5>
+        <p class="small mb-1">Email: hr@company.com</p>
+        <p class="small mb-1">Phone: +1 234 567 890</p>
+        <p class="small">Address: Company Headquarters</p>
+      </div>
+
+    </div>
+
+    <hr class="border-light">
+
+    <!-- Copyright -->
+    <div class="text-center small">
+      &copy; 2026 HRMS Portal. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
 </html>
