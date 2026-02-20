@@ -1,4 +1,6 @@
-
+#services, #about, #tested, #login, #description{
+    margin-bottom: 200px;
+}
 form{
     display: block;
 }
@@ -24,3 +26,18 @@ form{
 .hero-text p {
     font-size: 20px;
 }
+.logo{
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+}
+nav{
+    background-color: #355872;
+}
+body, section{
+    background-color: #F7F8F0;
+}
+#description, .card, #login{
+    background-color: #eeefe7;
+}
+
