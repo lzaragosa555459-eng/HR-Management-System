@@ -36,6 +36,7 @@ if($conn){
         <?php 
          if(isset($_POST['save'])){
             if(!empty($_POST['name'])){
+                $_SESSION['HRname'] = $_POST['name'];
                 $name = $_POST['name'];
 
                 $sqlV1 = "SELECT count(keyCode) from passkey"; 
@@ -45,6 +46,7 @@ if($conn){
                 $sqlV2 = "INSERT INTO hr (hrName, keyID) VALUES ('$name', '$random')";
                 mysqli_query($conn, $sqlV2);
                 
+                header("Location: HRapp.php");
             }
          }
         ?>
