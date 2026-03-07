@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    header("locaton: server.php");
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -231,32 +237,53 @@
                     </p>
                 </div>
                 <div class="col-4" >
-            <form class="p-3">
+            <form class="p-3" action="index.php" method="post">
             
             <!-- Username -->
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+              <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
             </div>
 
             <!-- Email -->
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
             </div>
 
             <!-- Password -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+              <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirm-password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="confirm-password" placeholder="Enter confirm password" name="confirm-password" required>
             </div>
 
             <!-- Submit Button -->
             <div class="d-grid">
-              <button type="submit" class="btn btn-primary">Sign Up</button>
+              <button type="submit" class="btn btn-primary" name="submit">Sign Up</button>
             </div>
-
+              
           </form>
+          <?php 
+              if(isset($_POST['submit'])){
+              if(!empty($_POST['username']) || !empty($_POST['email']) || !empty($_POST['password'])|| !empty($_POST['confirm-password'])){
+                  $_SESSION['username'] = $_POST['username'];
+                   $_SESSION['email'] = $_POST['email'];
+                    $_SESSION['password'] = $_POST['password'];
+                     $_SESSION['confirm-password'] = $_POST['confirm-password'];
+                     echo '<meta http-equiv="refresh" content="0,url=page/user.php">';
+                     
+                    
+              }
+              
+              
+            }
+           
+            ?>
                 </div>
                
             </div>
