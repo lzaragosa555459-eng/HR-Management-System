@@ -30,12 +30,31 @@ $conn = mysqli_connect($servername,$user,$password,$database);
                 <input type="email" placeholder="Enter email" name="loginEmail" required><br>
                 password: <br>
                 <input type="password" placeholder="Enter password" name="LoginPassword" required>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" name="submit">
             </form>
 
       <?php
+       
+    if(isset($_POST['submit'])){
+    
+    $username = $_POST['loginName'];
 
-        if(isset($_POST['loginName']) && isset($_POST['loginEmail']) && isset($_POST['LoginPassword'])){
+    // Check in HR table
+    $sql_hr = "SELECT 'HR' AS user_type FROM hr WHERE hrName = '$username'";
+    $result_hr = mysqli_query($conn, $sql_hr);
+
+    // Check in Employee table
+    $sql_emp = "SELECT 'Employee' AS user_type FROM employee WHERE empName = '$username'";
+    $result_emp = mysqli_query($conn, $sql_emp);
+
+    if(mysqli_num_rows($result_hr) > 0){
+         $_SESSION['hrUsername'] = $_POST['loginName'];
+         header("Location: page/HRfolder/HRapp.php");
+    } elseif(mysqli_num_rows($result_emp) > 0){
+        $_SESSION['empUsername'] = $_POST['loginName'];
+         header("Location: page/EMPfolder/EMPapp.php");
+    } else {
+          
             $_SESSION['username'] = $_POST['loginName'];
             $name = $_POST['loginName'];
             $email = $_POST['loginEmail'];
@@ -61,7 +80,10 @@ $conn = mysqli_connect($servername,$user,$password,$database);
             }
 
         }
-        ?>
+    }
+
+
+           ?>
         </div>
     </section>
 </body>

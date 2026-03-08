@@ -11,7 +11,7 @@ session_start();
 </head>
 <body>
     <?php 
-      $empname = $_SESSION['EMPname'];
+      $empname = $_SESSION['username'];
       echo "<h1>Welcome, Employee $empname !</h1>";
     ?>
 
