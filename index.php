@@ -1,7 +1,18 @@
 <?php
     session_start();
     header("locaton: server.php");
-    
+
+    $servername = "localhost";
+    $username = "root";
+    $pass = "";
+    $database = "hrms";
+
+    $conn = mysqli_connect($servername,$username,$pass,$database);
+    if($conn){
+    echo "database successfully connected";
+} else {
+    echo "error";
+}
 ?>
 
 <!DOCTYPE html>
@@ -266,23 +277,36 @@
             <div class="d-grid">
               <button type="submit" class="btn btn-primary" name="submit">Sign Up</button>
             </div>
+              <a href="login.php">Login</a>
               
           </form>
           <?php 
               if(isset($_POST['submit'])){
-              if(!empty($_POST['username']) || !empty($_POST['email']) || !empty($_POST['password'])|| !empty($_POST['confirm-password'])){
+                if($_POST['password'] == $_POST['confirm-password']){
+                   if(!empty($_POST['username']) || !empty($_POST['email']) || !empty($_POST['password'])|| !empty($_POST['confirm-password'])){
                   $_SESSION['username'] = $_POST['username'];
                    $_SESSION['email'] = $_POST['email'];
                     $_SESSION['password'] = $_POST['password'];
                      $_SESSION['confirm-password'] = $_POST['confirm-password'];
+
+                     $username = $_SESSION['username'];
+                     $email = $_SESSION['email'];
+                     $pass = $_SESSION['password'];
+
+                    $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+
+                    $sql = "INSERT INTO users (name, email, password) VALUES ('$username','$email','$hashedPassword')";
+                    mysqli_query($conn,$sql);
+
                      echo '<meta http-equiv="refresh" content="0,url=page/user.php">';
                      
                     
-              }
+                  }
               
-              
+                } else {
+                  echo "password and confirmpassword are not the same";
+                }
             }
-           
             ?>
                 </div>
                

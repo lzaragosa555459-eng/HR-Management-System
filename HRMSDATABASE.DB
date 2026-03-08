@@ -1,0 +1,28 @@
+CREATE TABLE PassKey(
+	keyID INT PRIMARY KEY AUTO_INCREMENT,
+	keyCode VARCHAR(6) NOT NULL
+);
+
+CREATE TABLE hr(
+	hrID INT PRIMARY KEY AUTO_INCREMENT,
+	hrName VARCHAR(20) NOT NULL,
+	FOREIGN KEY (keyID) REFERENCES PassKey (keyID),
+	keyID int not null 
+);
+
+CREATE TABLE employee(
+	empID INT PRIMARY KEY AUTO_INCREMENT,
+	empName VARCHAR(20) not null,
+	FOREIGN KEY (keyID) REFERENCES PassKey (keyID),
+	keyID int not null
+);
+
+
+CREATE TABLE users (
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+
