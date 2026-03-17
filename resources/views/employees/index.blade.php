@@ -12,6 +12,8 @@
     @section('content')
     <h1>Employees</h1>
     <button class="btn btn-add">Add+</button>
+    <div class="table-container">
+
    <table border="1" cellpadding="5" class="styled-table">
     <thead>
         <tr>
@@ -55,6 +57,7 @@
     @endforeach
     </tbody>
 </table>
+    </div>
 @endsection
 </body>
 </html>

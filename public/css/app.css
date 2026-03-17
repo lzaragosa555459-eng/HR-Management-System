@@ -168,29 +168,40 @@ body {
 }
 
 /* --- Modern Styled Table --- */
+/* --- Modern Styled Table (Smaller + Flexible) --- */
 .styled-table {
     width: 100%;
+    max-width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     background: white;
     border-radius: var(--radius);
-    overflow: hidden;
+    overflow-x: auto; /* horizontal scroll on very small screens */
     box-shadow: var(--shadow);
     border: 1px solid #e2e8f0;
+    font-size: 0.85rem; /* smaller text */
 }
 
 .styled-table thead tr {
     background-color: #f8fafc;
     color: var(--text-muted);
+    font-size: 0.8rem; /* smaller header text */
 }
 
-.styled-table th, .styled-table td {
-    padding: 16px;
+.styled-table th, 
+.styled-table td {
+    padding: 12px 10px; /* smaller padding for compact look */
     text-align: left;
 }
 
 .styled-table tbody tr:hover {
     background-color: #fbfcfe;
+}
+
+/* Optional: make table container responsive to sidebar toggle */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* allows horizontal scroll if sidebar pushes table */
 }
 
 /* --- Action Buttons --- */
