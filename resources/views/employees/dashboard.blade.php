@@ -8,7 +8,7 @@
 </head>
 <body>
     @extends('layout.sidebar')
-
+    
     @section('content')
     <h1>Dashboard</h1>
     <div class="cards-container">

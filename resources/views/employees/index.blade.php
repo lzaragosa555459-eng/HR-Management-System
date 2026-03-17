@@ -8,7 +8,7 @@
 </head>
 <body>
     @extends('layout.sidebar')
-
+   
     @section('content')
     <h1>Employees</h1>
     <button class="btn btn-add">Add+</button>

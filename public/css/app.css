@@ -1,185 +1,232 @@
- /* --- Sidebar --- */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .sidebar {
-            height: 100vh;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: -250px; /* hidden by default */
-            background-color: #2c3e50;
-            color: white;
-            overflow-x: hidden;
-            transition: 0.3s;
-            padding-top: 60px;
-        }
-
-        .sidebar a {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: white;
-            transition: 0.2s;
-        }
-
-        .sidebar a:hover {
-            background-color: #34495e;
-        }
-
-        .sidebar .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 25px;
-            cursor: pointer;
-        }
-
-        /* --- Main content --- */
-        .main {
-            margin-left: 0;
-            transition: margin-left 0.3s;
-            padding: 20px;
-        }
-
-        /* --- Open state --- */
-        .sidebar.open {
-            left: 0;
-        }
-
-        .main.shift {
-            margin-left: 250px;
-        }
-
-        /* Optional: toggle button */
-        .toggle-btn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #2c3e50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-        }
-
-/* Container for all cards */
-.cards-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin: 20px 0;
+/* --- Modern Variables --- */
+:root {
+    --primary: #6366f1;         /* Indigo */
+    --primary-hover: #4f46e5;
+    --bg-main: #f8fafc;        /* Soft gray background */
+    --sidebar-bg: #ffffff;      /* White sidebar for clean look */
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --glass: rgba(255, 255, 255, 0.7);
+    --radius: 12px;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-/* Individual card */
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* --- Sidebar (Fixed + Toggle) --- */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--sidebar-bg);
+    color: var(--text-main);
+    padding-top: 20px;
+    box-shadow: var(--shadow);
+    transform: translateX(-250px); /* start hidden */
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    transform: translateX(0); /* slide in */
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    text-decoration: none;
+    color: var(--text-muted);
+    margin: 4px 12px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background-color: #f1f5f9;
+    color: var(--primary);
+}
+
+/* Highlight active link */
+.sidebar a.active {
+    border: 2px solid var(--primary);
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+/* Close button inside sidebar */
+.sidebar .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text-muted);
+    background-color: transparent;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.sidebar .close-btn:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+    transform: rotate(90deg);
+}
+
+/* Sidebar header spacing (optional) */
+.sidebar-header {
+    padding: 0 24px 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 10px;
+}
+/* Only animate when using toggle button */
+.sidebar.animate {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* --- Main Content --- */
+.main {
+    margin-left: 0; /* start with sidebar hidden */
+    padding: 32px;
+    transition: margin-left 0.3s ease;
+}
+
+.main.shift {
+    margin-left: 250px; /* shift content when sidebar is open */
+}
+
+/* --- Toggle Menu Button --- */
+.toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #fff;
+    color: var(--text-main);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggle-btn:hover {
+    background-color: #f8fafc;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* --- Modern Dashboard Cards --- */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
 .card {
-    background-color: #3498db;   /* blue card */
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    flex: 1 1 200px;  /* makes it responsive */
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.2s;
+    background: white;
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid #f1f5f9;
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
 }
 
 .card h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
+    margin: 0 0 8px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
 }
 
 .card p {
-    font-size: 32px;
-    margin: 0;
-    font-weight: bold;
+    font-size: 1.875rem;
+    color: var(--text-main);
+    font-weight: 700;
 }
-/* Modern styled table */
+
+/* --- Modern Styled Table --- */
 .styled-table {
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 16px;
     width: 100%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 10px 10px 0 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: var(--radius);
     overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid #e2e8f0;
 }
 
 .styled-table thead tr {
-    background-color: #3498db;  /* header color */
-    color: #ffffff;
+    background-color: #f8fafc;
+    color: var(--text-muted);
+}
+
+.styled-table th, .styled-table td {
+    padding: 16px;
     text-align: left;
-    font-weight: bold;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3; /* zebra stripe */
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #3498db; /* footer border */
 }
 
 .styled-table tbody tr:hover {
-    background-color: #d0e4f7; /* highlight on hover */
-    cursor: pointer;
-}
-/* Common button style */
-.btn {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-right: 5px;
+    background-color: #fbfcfe;
 }
 
-/* Edit button - blue */
+/* --- Action Buttons --- */
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
 .btn-edit {
-    background-color: #3498db;
-    color: white;
+    background-color: #eff6ff;
+    color: #2563eb;
 }
 
 .btn-edit:hover {
-    background-color: #2980b9;
+    background-color: #dbeafe;
 }
 
-/* Delete button - red */
 .btn-delete {
-    background-color: #e74c3c;
-    color: white;
+    background-color: #fef2f2;
+    color: #dc2626;
 }
 
-.btn-delete:hover {
-    background-color: #c0392b;
-}
-/* Transparent outlined Add button */
 .btn-add {
-    background-color: transparent;   /* transparent inside */
-    color: #3498db;                  /* text color */
-    border: 2px solid #3498db;       /* stroke color */
-    padding: 6px 14px;
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 10px 20px;
     border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 10%;
 }
 
 .btn-add:hover {
-    background-color: #3498db;       /* fill on hover */
-    color: white;                     /* text turns white */
+    background-color: var(--primary);
+    color: white;
+    transform: scale(1.02);
 }
