@@ -54,30 +54,30 @@
     </div>
 
     <script>
-        function openSidebar() {
-            document.getElementById("mySidebar").classList.add("open");
-            document.getElementById("mainContent").classList.add("shift");
-            localStorage.setItem("sidebarOpen", "true");
-        }
+    // Get elements
+    const sidebar = document.getElementById("mySidebar");
+    const mainContent = document.getElementById("mainContent");
 
-        function closeSidebar() {
-            document.getElementById("mySidebar").classList.remove("open");
-            document.getElementById("mainContent").classList.remove("shift");
-            localStorage.setItem("sidebarOpen", "false");
+    // Load state from localStorage on page load
+    window.addEventListener("DOMContentLoaded", () => {
+        const isOpen = localStorage.getItem("sidebarOpen");
+        if (isOpen === "true") {
+        sidebar.classList.add("open");
+        mainContent.classList.add("shift");
         }
+    });
 
-        // On page load
-        window.addEventListener("DOMContentLoaded", () => {
-            if(localStorage.getItem("sidebarOpen") === "true") {
-                document.getElementById("mySidebar").classList.add("open");
-                document.getElementById("mainContent").classList.add("shift");
-            }
-        });
-        function openSidebar() {
-            const sidebar = document.getElementById("mySidebar");
-            sidebar.classList.add("open", "animate");
-            document.getElementById("mainContent").classList.add("shift");
-        }
+    function openSidebar() {
+        sidebar.classList.add("open");
+        mainContent.classList.add("shift");
+        localStorage.setItem("sidebarOpen", "true"); // save state
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove("open");
+        mainContent.classList.remove("shift");
+        localStorage.setItem("sidebarOpen", "false"); // save state
+    }
     </script>
 
 </body>
