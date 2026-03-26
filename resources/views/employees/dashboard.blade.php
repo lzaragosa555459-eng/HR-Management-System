@@ -92,7 +92,7 @@
     
     @section('content')
     <div class="main-content">
-        <h1 style="margin-bottom: 32px; font-weight: 700; color: #1e293b;">Dashboard</h1>
+        <h1 style="margin-bottom: 32px;margin-top:0; font-weight: 700; color: #1e293b;">Dashboard</h1>
 
         <div class="mainCardContainer">
 

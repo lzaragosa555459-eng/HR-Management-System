@@ -2,23 +2,47 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employees</title>
     
     <style>
-        /* Main content - Clean & Flexible with collapsible sidebar */
-        .main-content {
-            padding: 24px;
-            transition: padding-left 0.4s ease;
+        .main-content { padding: 24px; transition: padding-left 0.4s ease; }
+        .sidebar-collapsed .main-content { padding-left: 90px; }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
-        /* When sidebar is collapsed, reduce left padding slightly */
-        .sidebar-collapsed .main-content {
-            padding-left: 80px;   /* Adjust this value based on your collapsed sidebar width */
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 460px;
         }
 
-        /* Employee Grid - Fully flexible */
+        .search-container input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.02rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 1.35rem;
+        }
+
         .employees-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -29,17 +53,16 @@
             background: white;
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             display: flex;
-            flex-direction: row;
             gap: 18px;
             min-height: 172px;
         }
 
         .employee-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.18);
         }
 
         .profile-pic {
@@ -64,25 +87,13 @@
             object-fit: cover;
         }
 
-        .card-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }
+        .card-content { flex: 1; min-width: 0; }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .card-header h3 {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1e293b;
+        .card-header h3 { 
+            margin: 0; 
+            font-size: 1.25rem; 
+            font-weight: 700; 
+            color: #1e293b; 
         }
 
         .employee-id {
@@ -120,123 +131,132 @@
 
         .info-item span {
             color: #334155;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
-        .card-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: auto;
-            padding-top: 12px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .btn {
+        .card-actions button {
             padding: 8px 16px;
             border: none;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.875rem;
             cursor: pointer;
-            transition: all 0.2s;
             flex: 1;
         }
 
         .btn-edit  { background: #e0f2fe; color: #0369a1; }
-        .btn-edit:hover  { background: #bae6fd; }
-
         .btn-delete { background: #fee2e2; color: #b91c1c; }
-        .btn-delete:hover { background: #fecaca; }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .main-content {
-                padding: 16px;
-            }
-            
-            .employees-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 18px;
-            }
-            
-            .employee-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .profile-pic {
-                align-self: center;
-            }
-        }
     </style>
 </head>
 <body>
 
-    @extends('layout.sidebar')
-   
-    @section('content')
-    <div class="main-content">
-        <!-- Header -->
-        <div style="justify-content: space-between; align-items: center; margin-bottom: 32px;">
-            <h1 style="margin: 0;">Employees</h1>
-            <button class="btn" style="background: #6366f1; color: white; padding: 10px 24px; border-radius: 9999px;">
-                + Add Employee
-            </button>
+@extends('layout.sidebar')
+
+@section('content')
+<div class="main-content">
+    <div class="page-header">
+        <h1 style="margin: 0;">Employees</h1>
+        
+        <div class="search-container">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" id="searchInput" 
+                   placeholder="Search by name, email, department, position or ID..." 
+                   onkeyup="searchEmployees()">
         </div>
 
-        <!-- Employee Cards Grid -->
-        <div class="employees-grid">
-            @foreach($employees as $emp)
-                <div class="employee-card">
-                    <div class="profile-pic">
-                        @if(isset($emp->photo) && $emp->photo)
-                            <img src="{{ asset($emp->photo) }}" alt="{{ $emp->first_name }}">
-                        @else
-                            {{ strtoupper(substr($emp->first_name ?? '', 0, 1)) }}
-                        @endif
+        <button class="btn" style="background: #6366f1; color: white; padding: 11px 26px; border-radius: 9999px;">
+            + Add Employee
+        </button>
+    </div>
+
+    <div class="employees-grid" id="employeesGrid">
+        @foreach($employees as $emp)
+            <div class="employee-card" 
+                 data-name="{{ strtolower($emp->first_name . ' ' . $emp->last_name) }}"
+                 data-email="{{ strtolower($emp->email ?? '') }}"
+                 data-id="{{ $emp->id }}"
+                 data-department="{{ strtolower($emp->department?->name ?? '') }}"
+                 data-position="{{ strtolower($emp->position?->title ?? '') }}">
+
+                <div class="profile-pic">
+                    @if(isset($emp->photo) && $emp->photo)
+                        <img src="{{ asset($emp->photo) }}" alt="{{ $emp->first_name }}">
+                    @else
+                        {{ strtoupper(substr($emp->first_name ?? 'U', 0, 1)) }}
+                    @endif
+                </div>
+
+                <div class="card-content">
+                    <div class="card-header">
+                        <div>
+                            <h3>{{ $emp->first_name }} {{ $emp->last_name }}</h3>
+                            <div class="position">
+                                {{ $emp->position?->title ?? 'Staff' }}
+                            </div>
+                        </div>
+                        <div class="employee-id">#{{ $emp->id }}</div>
                     </div>
 
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div>
-                                <h3>{{ $emp->first_name }} {{ $emp->last_name }}</h3>
-                                <div class="position">{{ $emp->position_id ?? 'Staff' }}</div>
-                            </div>
-                            <div class="employee-id">#{{ $emp->id }}</div>
+                    <div class="card-info">
+                        <div class="info-item">
+                            <strong>Email</strong>
+                            <span>{{ $emp->email }}</span>
                         </div>
+                        <div class="info-item">
+                            <strong>Phone</strong>
+                            <span>{{ $emp->phone ?? '—' }}</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Department</strong>
+                            <span>{{ $emp->department?->name ?? '—' }}</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Position</strong>
+                            <span>{{ $emp->position?->title ?? 'Staff' }}</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Hire Date</strong>
+                            <span>{{ $emp->hire_date ?? '—' }}</span>
+                        </div>
+                    </div>
 
-                        <div class="card-info">
-                            <div class="info-item">
-                                <strong>Email</strong>
-                                <span title="{{ $emp->email }}">{{ $emp->email }}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Phone</strong>
-                                <span>{{ $emp->phone ?? '—' }}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Department</strong>
-                                <span>{{ $emp->department_id ?? '—' }}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Hire Date</strong>
-                                <span>{{ $emp->hire_date ?? '—' }}</span>
-                            </div>
-                        </div>
-
-                        <div class="card-actions">
-                            <button class="btn btn-edit">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
-                        </div>
+                    <div class="card-actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
-    @endsection
+</div>
+@endsection
+
+<script>
+function searchEmployees() {
+    const input = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.employee-card');
+
+    cards.forEach(card => {
+        const name       = card.dataset.name || '';
+        const email      = card.dataset.email || '';
+        const id         = card.dataset.id || '';
+        const department = card.dataset.department || '';
+        const position   = card.dataset.position || '';
+
+        if (name.includes(input) || 
+            email.includes(input) || 
+            id.includes(input) || 
+            department.includes(input) || 
+            position.includes(input)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
 
 </body>
 </html>

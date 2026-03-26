@@ -10,10 +10,14 @@ use App\Models\Position;
 class EmployeeController extends Controller
 {
     //Read page
-    public function index() {
-        $employees = Employee::all();
-        return view('employees.index', compact('employees'));
-    }
+  public function index()
+{
+    $employees = Employee::with(['department', 'position'])
+                         ->latest()
+                         ->get();
+
+    return view('employees.index', compact('employees'));
+}
         public function dashboard() {
         $employeesCount = Employee::count();
         $departmentsCount = Department::count();
