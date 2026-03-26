@@ -3,9 +3,9 @@
     --primary: #6366f1;         /* Indigo */
     --primary-hover: #4f46e5;
     --bg-main: #f8fafc;        /* Soft gray background */
-    --sidebar-bg: #ffffff;      /* White sidebar for clean look */
+    --sidebar-bg: #C5B0FF;      /* White sidebar for clean look */
     --text-main: #1e293b;
-    --text-muted: #64748b;
+    --text-muted: #000000;
     --glass: rgba(255, 255, 255, 0.7);
     --radius: 12px;
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -16,6 +16,10 @@ body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: var(--bg-main);
     color: var(--text-main);
+}
+h1{
+    
+    font-size: 50px;
 }
 
 /* --- Sidebar (Fixed + Toggle) --- */
@@ -139,13 +143,15 @@ body {
 }
 
 .card {
-    background: white;
+    
+    background: #E3D9FF;
     padding: 24px;
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid #f1f5f9;
+    /*box-shadow: var(--shadow);
+    border: 1px solid #f1f5f9;*/
     text-align: left;
     transition: transform 0.2s, box-shadow 0.2s;
+    height: 100px;
 }
 
 .card:hover {
@@ -198,11 +204,6 @@ body {
     background-color: #fbfcfe;
 }
 
-/* Optional: make table container responsive to sidebar toggle */
-.table-container {
-    width: 100%;
-    overflow-x: auto; /* allows horizontal scroll if sidebar pushes table */
-}
 
 /* --- Action Buttons --- */
 .btn {

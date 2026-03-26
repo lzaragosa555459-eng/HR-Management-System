@@ -10,6 +10,8 @@
 
 <!-- Sidebar -->
 <div id="mySidebar" class="sidebar">
+    <img src="{{ asset('images\CoreHRlogo.png') }}" alt="logo" height="50px" style="margin-left: 10px; margin-bottom:40px;">
+
     <span class="close-btn" onclick="closeSidebar()">×</span>
 
     <a href="{{ route('employees.dashboard') }}" 
@@ -22,28 +24,20 @@
         <i class="bi bi-people-fill"></i> Employees
     </a>
 
-    <a href="#" class="{{ Route::is('departments.*') ? 'active' : '' }}">
-        <i class="bi bi-building"></i> Departments
-    </a>
-
-    <a href="#" class="{{ Route::is('positions.*') ? 'active' : '' }}">
-        <i class="bi bi-person-badge"></i> Positions
+    <a href="#" class="{{ Route::is('organizationAndSchedule.*') ? 'active' : '' }}">
+        <i class="bi bi-building"></i> Organization and Schedule
     </a>
 
     <a href="#" class="{{ Route::is('attendance.*') ? 'active' : '' }}">
         <i class="bi bi-calendar-check-fill"></i> Attendance
     </a>
 
-    <a href="#" class="{{ Route::is('leaves.*') ? 'active' : '' }}">
-        <i class="bi bi-calendar-x-fill"></i> Leaves
-    </a>
-
     <a href="#" class="{{ Route::is('payroll.*') ? 'active' : '' }}">
         <i class="bi bi-cash-stack"></i> Payroll
     </a>
-
-    <a href="#" class="{{ Route::is('users.*') ? 'active' : '' }}">
-        <i class="bi bi-person-circle"></i> Users
+<br><br><br><br><br>
+    <a href="#" class="{{ Route::is('logout.*') ? 'active' : '' }}">
+        <i class="bi bi-person-circle"></i> logout
     </a>
 </div>
 
