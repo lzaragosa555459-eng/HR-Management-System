@@ -100,13 +100,19 @@
             <h3 id="modalTitle">Add New Employee</h3>
             <span style="font-size:28px; cursor:pointer;" onclick="closeModal()">×</span>
         </div>
-<!--Check this/ no tel no.-->
+<!--
+EMPLOYEE FORM (ADD)      
+Check this/ no tel no.
+update new stuff
+-->
         <form id="employeeForm">
             <div class="form-group"><label>First Name</label><input type="text" id="first_name" required></div>
             <div class="form-group"><label>Last Name</label><input type="text" id="last_name" required></div>
             <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
             <div class="form-group"><label>Phone</label><input type="text" id="phone" required></div>
-            <div class="form-group"><label>Address</label><input type="text" id="phone" required></div>
+            <div class="form-group"><label>Address</label><input type="text" id="address" required></div>
+            <div class="form-group"><label>Gender</label><input type="text" id="gender" required></div>
+            <div class="form-group"><label>Birth Date</label><input type="date" id="date_of_birth" required></div>
             <div class="form-group">
                 <label>Department</label>
                 <select id="department_id">
@@ -115,6 +121,7 @@
                         <option value="{{ $dept->id }}">{{ $dept->name }}</option>
                     @endforeach
                 </select>
+           
             </div>
             <div class="form-group">
                 <label>Position</label>
@@ -173,8 +180,9 @@ function generateCardHtml(emp) {
                 </div>
                 <div class="card-info">
                     <div class="info-item"><strong>Email</strong><span>${emp.email}</span></div>
-                    <div class="info-item"><strong>Phone</strong><span>${emp.phone || '—'}</span></div>
-                    <div class="info-item"><strong>Dept</strong><span>${emp.department?.name || '—'}</span></div>
+                    <div class="info-item"><strong>Phone</strong><span>${emp.phone}</span></div>
+                    <div class="info-item"><strong>Phone</strong><span>${emp.address}</span></div>
+                    <div class="info-item"><strong>Dept</strong><span>${emp.department?.name}</span></div>
                 </div>
                 <div class="card-actions">
                     <button class="btn btn-edit" onclick="editEmployee('${emp.id}')">Edit</button>
@@ -182,7 +190,7 @@ function generateCardHtml(emp) {
                 </div>
             </div>
         </div>`;
-}
+} 
 
 // --- 3. SAVE LOGIC ---
 function saveEmployee() {
@@ -191,6 +199,9 @@ function saveEmployee() {
         last_name: document.getElementById('last_name').value,
         email: document.getElementById('email').value,
         phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        gender: document.getElementById('gender').value,
+        date_of_birth: document.getElementById('date_of_birth').value,
         department_id: document.getElementById('department_id').value,
         position_id: document.getElementById('position_id').value,
         hire_date: document.getElementById('hire_date').value

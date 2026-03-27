@@ -37,6 +37,9 @@ class EmployeeController extends Controller
             'last_name'     => 'required|string|max:255',
             'email'         => 'required|email|unique:employees,email',
             'phone'         => 'required|string|max:20',
+            'address'       => 'required|string|max:20',
+            'gender'        => 'required|string|max:20',
+            'date_of_birth' => 'nullable|date',
             'department_id' => 'required|exists:departments,id',
             'position_id'   => 'required|exists:positions,id',
             'hire_date'     => 'required|date',
@@ -60,6 +63,9 @@ class EmployeeController extends Controller
             'last_name'     => 'required|string|max:255',
             'email'         => 'required|email|unique:employees,email,' . $employee->id,
             'phone'         => 'nullable|string|max:20',
+            'address'       => 'required|string|max:20',
+            'gender'        => 'required|string|max:20',
+            'date_of_birth' => 'nullable|date',
             'department_id' => 'nullable|exists:departments,id',
             'position_id'   => 'nullable|exists:positions,id',
             'hire_date'     => 'nullable|date',
@@ -96,6 +102,10 @@ class EmployeeController extends Controller
         $positionsCount = Position::count();
 
         return view('employees.dashboard', compact('employeesCount', 'departmentsCount', 'positionsCount'));
+    }
+
+    public function Organization_Schedule(){
+        return view('employees.Organization_Schedule');
     }
 
     // Optional methods (you can leave them empty or remove if not needed)

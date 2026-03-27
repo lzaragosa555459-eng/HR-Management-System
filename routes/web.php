@@ -12,7 +12,7 @@ Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.
 Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('employees.dashboard');
 Route::get('/employees/data', [App\Http\Controllers\EmployeeController::class, 'getAll'])->name('employees.data');
 
-
+Route::get('/Organization and Schedule', [EmployeeController::class, 'Organization_Schedule'])->name('employees.organization_Schedule');
 
 // AJAX/Forms for Employees
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');         // Add

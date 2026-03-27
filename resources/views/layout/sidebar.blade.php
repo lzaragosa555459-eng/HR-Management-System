@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{{ asset('css/app.css')}}">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,7 @@
         <i class="bi bi-people-fill"></i> Employees
     </a>
 
-    <a href="#" class="{{ Route::is('organizationAndSchedule.*') ? 'active' : '' }}">
+    <a href="{{ Route('employees.organization_Schedule') }}" class="{{ Route::is('employees.organization_Schedule.*') ? 'active' : '' }}">
         <i class="bi bi-building"></i> Organization and Schedule
     </a>
 
