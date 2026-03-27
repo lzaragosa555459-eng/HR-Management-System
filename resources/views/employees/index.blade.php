@@ -58,7 +58,7 @@
     </div>
 
   <div class="employees-grid" id="employeesGrid">
-    @foreach($employees as $emp)
+    @foreach($employees as $emp) <!--came from the contoller compact('employees')-->
         <div class="employee-card" data-id="{{ $emp->id }}">
             <div class="profile-pic">
                 @if(isset($emp->photo) && $emp->photo)
@@ -100,12 +100,13 @@
             <h3 id="modalTitle">Add New Employee</h3>
             <span style="font-size:28px; cursor:pointer;" onclick="closeModal()">×</span>
         </div>
-        
+<!--Check this/ no tel no.-->
         <form id="employeeForm">
             <div class="form-group"><label>First Name</label><input type="text" id="first_name" required></div>
             <div class="form-group"><label>Last Name</label><input type="text" id="last_name" required></div>
             <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
-            <div class="form-group"><label>Phone</label><input type="text" id="phone"></div>
+            <div class="form-group"><label>Phone</label><input type="text" id="phone" required></div>
+            <div class="form-group"><label>Address</label><input type="text" id="phone" required></div>
             <div class="form-group">
                 <label>Department</label>
                 <select id="department_id">

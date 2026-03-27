@@ -6,7 +6,7 @@ use App\Http\Controllers\EmployeeController;
 Route::get('/', [EmployeeController::class, 'dashboard'])->name('home'); // Homepage
 
 // Employees index page
-Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index'); // <a href="{{ route('employees.index')}} ><\a> its in the sidebar.blade.php
 
 // Employees dashboard page
 Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('employees.dashboard');
